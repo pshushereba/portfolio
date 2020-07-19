@@ -1,5 +1,12 @@
+import Header from "../components/layout/Header.js";
+
 const Index = ({ title, description, ...props }) => {
-  return <div>Hello, world!</div>;
+  return (
+    <div>
+      <Header />
+      <p>Hello, world!</p>
+    </div>
+  );
 };
 
 export default Index;
