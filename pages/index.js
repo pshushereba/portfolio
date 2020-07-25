@@ -1,10 +1,11 @@
-import Header from "../components/layout/Header.js";
+import Layout from "../components/layout/index.js";
 
 const Index = ({ title, description, ...props }) => {
   return (
     <div>
-      <Header />
-      <p>Hello, world!</p>
+      <Layout>
+        <p>Hello, world!</p>
+      </Layout>
     </div>
   );
 };
