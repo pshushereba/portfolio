@@ -4,7 +4,7 @@ const Index = ({ title, description, ...props }) => {
   return (
     <div>
       <Layout>
-        <p>Hello, world!</p>
+        <p className="text-lg">Hello, world!</p>
       </Layout>
     </div>
   );

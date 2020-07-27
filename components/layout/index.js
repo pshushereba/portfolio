@@ -1,9 +1,11 @@
-import Header from "../Layout/Header";
+import Header from "../Layout/Header.js";
 
-export default ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <div>
       <Header />
     </div>
   );
 };
+
+export default Layout;
