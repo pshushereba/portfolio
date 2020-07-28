@@ -7,7 +7,7 @@ const Header = () => {
         <h2 className="text-blue-400 text-xl">Patrick Shushereba</h2>
         <div>
           <Link href="/about">
-            <a className="m-4">About Me</a>
+            <a className="m-4">About</a>
           </Link>
           <Link href="/projects">
             <a className="m-4">Projects</a>
