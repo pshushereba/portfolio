@@ -14,9 +14,9 @@
             Software Developer, bookworm, and distance runner.
           </h1>
           <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I'm Patrick, a software developer based in Southern California. I'm the founder and CEO
-            of Appetizen, where we provide a platform which enables creators to monetize their
-            audiences.
+            I'm Patrick, a software developer based in Southern California. I'm the creator of
+            Appetizen, where we provide a platform which enables creators to monetize their
+            audiences. Also the author of the Lard Have Mercy blog.
           </p>
           <div class="mt-6 flex gap-6">
             <!-- <SocialLink
@@ -42,6 +42,9 @@
           </div>
         </div>
       </Container>
+      <Container>
+        <Skyline />
+      </Container>
       <Container class="mt-24 md:mt-28">
         <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div class="flex flex-col gap-16">
@@ -50,8 +53,8 @@
             <Card></Card>
           </div>
           <div class="space-y-10 lg:pl-16 xl:pl-24">
-            <!-- <Newsletter />
-              <Resume /> -->
+            <Newsletter />
+            <Resume />
           </div>
         </div>
       </Container>
