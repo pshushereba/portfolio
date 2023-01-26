@@ -43,7 +43,7 @@
         </div>
       </Container>
       <Container>
-        <Skyline />
+        <Skyline class="dark:fill-white" />
       </Container>
       <Container class="mt-24 md:mt-28">
         <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">

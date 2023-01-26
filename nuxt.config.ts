@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@heroicons/vue'],
   },
-  modules: ['@nuxt/content'],
+  modules: ['@nuxt/content', '@vueuse/nuxt'],
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
