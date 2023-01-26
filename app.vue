@@ -8,6 +8,7 @@
     <div class="relative">
       <Header />
       <NuxtPage />
+      <Footer />
     </div>
   </div>
 </template>

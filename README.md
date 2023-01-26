@@ -1,42 +1,10 @@
-# Nuxt 3 Minimal Starter
+Things to fix:
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- [ ] Fix width of skyline SVG
+- [ ] Get a favicon
+- [ ] Fix aspect ratio of main header avatar
+- [ ] Fix ellipitical avatar on other pages
+- [ ] Fix text color of article (Card component) on hover
+- [ ] Wire up Download CV button to download resume
+- [ ] Put together a book template
+- [ ] Set up newsletter field to send to Mailchimp
