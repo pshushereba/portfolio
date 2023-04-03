@@ -1,7 +1,7 @@
 <template>
   <div class="align-center">
     <svg
-      width="646"
+      width="auto"
       height="209"
       viewBox="0 0 646 209"
       fill="none"

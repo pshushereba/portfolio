@@ -53,7 +53,7 @@
       </li>
     </ol>
     <button
-      href="#"
+      @click="downloadResume"
       variant="secondary"
       class="group mt-6 w-full inline-flex items-center gap-2 justify-center rounded-md py-2 px-3 text-sm outline-offset-2 transition active:transition-none bg-zinc-800 font-semibold text-zinc-100 hover:bg-zinc-700 active:bg-zinc-800 active:text-zinc-100/70 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700 dark:active:text-zinc-100/70"
     >
@@ -79,6 +79,7 @@
 import nexient from '~/assets/images/nexient.png';
 import sbc from '~/assets/images/san_bern_court.png';
 import { BuildingOfficeIcon } from '@heroicons/vue/20/solid';
+import pdf_resume from "~/assets/static/resume.pdf"
 
 let resume = ref([
   {
@@ -106,6 +107,14 @@ let resume = ref([
     end: '2019',
   },
 ]);
+
+function downloadResume() {
+  const link = document.createElement('a');
+  link.href = pdf_resume
+  link.download = 'Shushereba_Resume.pdf';
+  link.target = '_blank'
+  link.click()
+}
 </script>
 
 <style lang="scss" scoped></style>
