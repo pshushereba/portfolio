@@ -10,7 +10,9 @@
         {{ intro }}
       </p>
     </header>
-    <div className="mt-16 sm:mt-20"></div>
+    <div className="mt-16 sm:mt-20">
+      <slot />
+    </div>
   </Container>
 </template>
 
