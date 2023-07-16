@@ -79,7 +79,7 @@
 import nexient from '~/assets/images/nexient.png';
 import sbc from '~/assets/images/san_bern_court.png';
 import { BuildingOfficeIcon } from '@heroicons/vue/20/solid';
-import pdf_resume from "~/assets/static/resume.pdf"
+import pdf_resume from '~/assets/static/resume.pdf';
 
 let resume = ref([
   {
@@ -87,10 +87,11 @@ let resume = ref([
     title: 'Developer II',
     logo: nexient,
     start: '2021',
-    end: {
-      label: 'Present',
-      dateTime: new Date().getFullYear(),
-    },
+    end: '2023',
+    // end: {
+    //   label: 'Present',
+    //   dateTime: new Date().getFullYear(),
+    // },
   },
   {
     company: 'Fragomen, Del Rey, Bernsen, & Loewy',
@@ -110,10 +111,10 @@ let resume = ref([
 
 function downloadResume() {
   const link = document.createElement('a');
-  link.href = pdf_resume
+  link.href = pdf_resume;
   link.download = 'Shushereba_Resume.pdf';
-  link.target = '_blank'
-  link.click()
+  link.target = '_blank';
+  link.click();
 }
 </script>
 

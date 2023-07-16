@@ -13,6 +13,7 @@
 
 <script setup>
 import appetizenLogo from '~/assets/images/appetizen_logo.png';
+import supadataLogo from '~/assets/images/supadata_logo_transparent.png';
 import projectIcon from '~/assets/images/project_icon.png';
 let projects = ref([
   {
@@ -26,7 +27,7 @@ let projects = ref([
     name: 'Supadata',
     description: 'A tool to map data from from various sources to your Supabase database.',
     link: { href: 'https://supadata.app', label: 'supadata.app' },
-    logo: projectIcon,
+    logo: supadataLogo,
   },
   {
     name: 'Vue Connexion',
