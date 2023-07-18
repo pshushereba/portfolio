@@ -10,7 +10,7 @@
                   <NuxtLink to="/about">About</NuxtLink>
                   <NuxtLink to="/articles">Articles</NuxtLink>
                   <NuxtLink to="/projects">Projects</NuxtLink>
-                  <NuxtLink to="/books">Books</NuxtLink>
+                  <!-- <NuxtLink to="/books">Books</NuxtLink> -->
                 </div>
                 <p class="text-sm text-zinc-400 dark:text-zinc-500">
                   &copy; {{ new Date().getFullYear() }} Patrick Shushereba. All rights reserved.

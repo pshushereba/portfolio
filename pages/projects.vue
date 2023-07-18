@@ -29,27 +29,6 @@ let projects = ref([
     link: { href: 'https://supadata.app', label: 'supadata.app' },
     logo: supadataLogo,
   },
-  {
-    name: 'Vue Connexion',
-    description:
-      'Enabling creators to monetize their audiences through a platform that provides a seamless experience for both creators and their fans.',
-    link: { href: 'https://appetizen.com', label: 'appetizen.com' },
-    logo: projectIcon,
-  },
-  {
-    name: 'Appetizen',
-    description:
-      'Enabling creators to monetize their audiences through a platform that provides a seamless experience for both creators and their fans.',
-    link: { href: 'https://appetizen.com', label: 'appetizen.com' },
-    logo: appetizenLogo,
-  },
-  {
-    name: 'Appetizen',
-    description:
-      'Enabling creators to monetize their audiences through a platform that provides a seamless experience for both creators and their fans.',
-    link: { href: 'https://appetizen.com', label: 'appetizen.com' },
-    logo: appetizenLogo,
-  },
 ]);
 </script>
 

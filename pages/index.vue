@@ -14,9 +14,10 @@
             Software Developer, bookworm, and distance runner.
           </h1>
           <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I'm Patrick, a software developer based in Southern California. I'm the creator of
+            I'm Patrick, a software developer based in Southern California. I'm currently building
             Appetizen, where we provide a platform which enables creators to monetize their
-            audiences. Also the author of the Lard Have Mercy blog.
+            audiences. Also building Supadata, a tool to map data from from various sources to your
+            Supabase database.
           </p>
           <div class="mt-6 flex gap-6">
             <NuxtLink to="https://github.com/pshushereba" target="_blank" class="group -m-1 p-1">
@@ -55,8 +56,10 @@
       </Container>
       <Container class="mt-24 md:mt-28">
         <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div v-for="article in articleList" class="flex flex-col gap-16">
-            <Card :article="article" />
+          <div class="flex flex-col gap-16">
+            <div v-for="article in articleList">
+              <Card :article="article" />
+            </div>
           </div>
           <div class="space-y-10 lg:pl-16 xl:pl-24">
             <Newsletter />

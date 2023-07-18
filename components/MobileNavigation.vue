@@ -81,11 +81,11 @@
                   <NuxtLink to="/projects">Projects</NuxtLink>
                 </HeadlessPopoverButton>
               </li>
-              <li>
+              <!-- <li>
                 <HeadlessPopoverButton class="block py-2">
                   <NuxtLink to="/books">Books</NuxtLink>
                 </HeadlessPopoverButton>
-              </li>
+              </li> -->
             </ul>
           </nav>
         </HeadlessPopoverPanel>
