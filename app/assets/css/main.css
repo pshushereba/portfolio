@@ -1,6 +1,8 @@
 @import 'tailwindcss';
+@import './tokens.css';
+@import './components.css';
 
-/* Toggle dark mode with a `.dark` class on <html> (see ToggleSwitch.vue). */
+/* Toggle dark mode with a `.dark` class on <html> (see ThemeSwitch.vue). */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -33,6 +35,35 @@
 }
 
 /*
+  Design-system colours as Tailwind utilities (bg-surface, text-ink, text-citrus…).
+  `inline` keeps them pointing at the CSS variables, so they follow light/dark automatically.
+*/
+@theme inline {
+  --color-page: var(--bg-page);
+  --color-surface: var(--bg-surface);
+  --color-raised: var(--bg-raised);
+  --color-sunken: var(--bg-sunken);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-control: var(--border-control);
+  --color-ink-strong: var(--ink-strong);
+  --color-ink: var(--ink);
+  --color-body: var(--text);
+  --color-muted: var(--text-muted);
+  --color-citrus: var(--citrus);
+  --color-citrus-hover: var(--citrus-hover);
+  --color-citrus-glow: var(--citrus-glow);
+  --color-citrus-tint: var(--citrus-tint);
+  --color-on-citrus: var(--on-citrus);
+  --color-teal: var(--teal);
+  --color-teal-tint: var(--teal-tint);
+  --color-sun: var(--sun);
+  --color-on-sun: var(--on-sun);
+  --color-danger: var(--danger);
+  --color-focus: var(--focus);
+}
+
+/*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
   looks the same as it did with Tailwind CSS v3.
@@ -46,12 +77,31 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+    border-color: var(--border-strong, currentcolor);
   }
 
   /* Tailwind v4 defaults buttons to `cursor: default`; keep the v3 pointer. */
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-page);
+    color: var(--text);
+    font-family: var(--font-sans);
+  }
+
+  /* One focus ring for everything the design system doesn't already style. */
+  :where(a, button, [tabindex]):focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--sun);
+    color: var(--on-sun);
   }
 }

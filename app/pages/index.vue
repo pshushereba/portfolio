@@ -4,22 +4,27 @@
       <Container class="mt-9">
         <div class="max-w-2xl">
           <h1
-            class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl"
+            class="text-4xl font-bold tracking-tight text-ink sm:text-5xl"
           >
             Software Developer, bookworm, and distance runner.
           </h1>
-          <p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+          <p class="mt-6 text-base text-body">
             I'm Patrick, a software developer based in Southern California. I'm currently building
             Appetizen, where we provide a platform which enables creators to monetize their
             audiences. Also building Supadata, a tool to map data from from various sources to your
             Supabase database.
           </p>
           <div class="mt-6 flex gap-6">
-            <NuxtLink to="https://github.com/pshushereba" target="_blank" class="group -m-1 p-1">
+            <NuxtLink
+              to="https://github.com/pshushereba"
+              target="_blank"
+              aria-label="GitHub"
+              class="group -m-1 rounded-md p-1"
+            >
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
-                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
+                class="h-6 w-6 fill-muted transition group-hover:fill-citrus"
               >
                 <path
                   fillRule="evenodd"
@@ -31,12 +36,13 @@
             <NuxtLink
               to="https://www.linkedin.com/in/pshushereba/"
               target="_blank"
-              class="group -m-1 p-1"
+              aria-label="LinkedIn"
+              class="group -m-1 rounded-md p-1"
             >
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
-                class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300"
+                class="h-6 w-6 fill-muted transition group-hover:fill-citrus"
               >
                 <path
                   d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715zM7.003 8.575a1.546 1.546 0 01-1.548-1.549 1.548 1.548 0 111.547 1.549zm1.336 9.764H5.666V9.75H8.34v8.589zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.003z"
@@ -47,18 +53,23 @@
         </div>
       </Container>
       <Container>
-        <Skyline class="dark:fill-white" />
+        <Skyline class="mt-12" />
       </Container>
       <Container class="mt-24 md:mt-28">
         <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div class="flex flex-col gap-16">
-            <div v-for="article in articleList" :key="article.path">
-              <Card :article="article" />
-            </div>
+            <ArticleTeaser
+              v-for="article in articleList"
+              :key="article.path"
+              :title="article.title"
+              :description="article.description"
+              :date="article.dates.published"
+              :to="article.path"
+            />
           </div>
           <div class="space-y-10 lg:pl-16 xl:pl-24">
-            <Newsletter />
-            <Resume />
+            <NewsletterSignup />
+            <WorkHistory />
           </div>
         </div>
       </Container>

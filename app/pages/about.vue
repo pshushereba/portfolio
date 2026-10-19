@@ -7,15 +7,15 @@
             :src="aboutMain"
             alt=""
             sizes="(min-width: 1024px) 32rem, 20rem"
-            class="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+            class="aspect-square rotate-3 rounded-2xl bg-sunken object-cover ring-4 ring-citrus-glow/40"
           />
         </div>
       </div>
       <div class="lg:order-first lg:row-span-2">
-        <h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+        <h1 class="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
           I'm Patrick Shushereba. I live in Southern California, where I design the future.
         </h1>
-        <div class="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+        <div class="mt-6 space-y-7 text-base text-body">
           <p>
             Leverage agile frameworks to provide a robust synopsis for high level overviews.
             Iterative approaches to corporate strategy foster collaborative thinking to further the

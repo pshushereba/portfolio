@@ -3,11 +3,9 @@
     title="Things I've made trying to put my dent in the universe."
     intro="I've worked on tons of little projects over the years but these are the ones that I'm most proud of."
   >
-    <div class="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-      <ul role="list" v-for="project in projects" :key="project.name">
-        <ProjectCard :project="project" />
-      </ul>
-    </div>
+    <ul role="list" class="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+      <ProjectTile v-for="project in projects" :key="project.name" v-bind="project" />
+    </ul>
   </SimpleLayout>
 </template>
 

@@ -2,7 +2,11 @@ export interface Project {
   name: string;
   description: string;
   link: { href: string; label: string };
-  logo: string;
+  logo?: string;
+  /** Citrus logo well — for the one project you're actively building. */
+  featured?: boolean;
+  /** Optional status label shown as a TopicTag, e.g. "Building". */
+  tag?: string;
 }
 
 /** A plain year (e.g. `'2021'`) or a labelled date such as "Present". */

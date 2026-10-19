@@ -1,0 +1,99 @@
+/*
+ * Shushereba Design System — tokens.
+ * Source of truth: the design system artifact (tokens.json). Light is the default;
+ * dark applies under html.dark (set by ThemeSwitch and the head script in nuxt.config.ts).
+ */
+:root {
+  --bg-page: #fafafa;
+  --bg-surface: #ffffff;
+  --bg-raised: #ffffffe6;
+  --bg-sunken: #f4f4f5;
+  --border: #f4f4f5;
+  --border-strong: #e4e4e7;
+  --border-control: #8b8b94;
+  --ink-strong: #18181b;
+  --ink: #27272a;
+  --text: #52525b;
+  --text-muted: #71717a;
+  --citrus: #c2410c;
+  --citrus-hover: #9a3412;
+  --on-citrus: #ffffff;
+  --citrus-glow: #ff922b;
+  --citrus-tint: #fff4e6;
+  --teal: #0f766e;
+  --on-teal: #ffffff;
+  --teal-tint: #f0fdfa;
+  --sun: #fcc419;
+  --on-sun: #18181b;
+  --neutral-fill: #27272a;
+  --neutral-fill-hover: #3f3f46;
+  --on-neutral: #f4f4f5;
+  --danger: #c92a2a;
+  --success: var(--teal);
+  --focus: var(--citrus);
+  --overlay: #27272a66;
+  --shadow-md: 0 4px 6px -1px rgb(39 39 42 / 0.05), 0 2px 4px -2px rgb(39 39 42 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(39 39 42 / 0.05), 0 4px 6px -4px rgb(39 39 42 / 0.05);
+}
+
+:root.dark,
+[data-theme='dark'] {
+  --bg-page: #000000;
+  --bg-surface: #18181b;
+  --bg-raised: #27272ae6;
+  --bg-sunken: #27272a;
+  --border: #3f3f4666;
+  --border-strong: #3f3f46;
+  --border-control: #71717a;
+  --ink-strong: #f4f4f5;
+  --ink: #f4f4f5;
+  --text: #a1a1aa;
+  --text-muted: #8b8b94;
+  --citrus: #ff922b;
+  --citrus-hover: #ffa94d;
+  --on-citrus: #18181b;
+  --citrus-glow: #e8590c;
+  --citrus-tint: #ff922b1f;
+  --teal: #2dd4bf;
+  --on-teal: #18181b;
+  --teal-tint: #2dd4bf1a;
+  --sun: #fcc419;
+  --on-sun: #18181b;
+  --neutral-fill: #3f3f46;
+  --neutral-fill-hover: #52525b;
+  --on-neutral: #f4f4f5;
+  --danger: #ff8787;
+  --success: var(--teal);
+  --focus: var(--citrus);
+  --overlay: #000000cc;
+  --shadow-md: 0 4px 6px -1px rgb(39 39 42 / 0.05), 0 2px 4px -2px rgb(39 39 42 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(39 39 42 / 0.05), 0 4px 6px -4px rgb(39 39 42 / 0.05);
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-32: 128px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+  --frame-max: 80rem;
+  --content-max: 64rem;
+  --measure: 42rem;
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color-scheme: light;
+}
+:root.dark {
+  color-scheme: dark;
+}

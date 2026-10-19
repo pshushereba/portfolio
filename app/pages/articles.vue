@@ -4,7 +4,14 @@
     intro="All of my long-form thoughts on programming, leadership, software design, and more, collected."
   >
     <div class="flex flex-col gap-16">
-      <Card v-for="article in articleList" :key="article.path" :article="article" />
+      <ArticleTeaser
+        v-for="article in articleList"
+        :key="article.path"
+        :title="article.title"
+        :description="article.description"
+        :date="article.dates.published"
+        :to="article.path"
+      />
     </div>
   </SimpleLayout>
 </template>
