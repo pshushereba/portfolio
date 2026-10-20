@@ -172,6 +172,80 @@
 :where(.dark) .ds-skyline-sun { background: var(--citrus-glow); }
 .ds-skyline-ground { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: var(--citrus-glow); }
 
+/* ---------- Route band (about) ----------
+   Same shell as the Skyline band: tinted, rounded, glow ground strip. The dotted path is a
+   stretched SVG; the markers are HTML so they never distort. */
+.ds-route {
+  position: relative; overflow: hidden; margin-top: 72px;
+  padding: 40px clamp(20px, 3vw, 40px) 48px;
+  border-radius: var(--radius-3xl); background: var(--citrus-tint);
+  container-type: inline-size;
+}
+.ds-route-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); flex-wrap: wrap; }
+.ds-route-title { margin: 0; font: 600 14px/24px var(--font-sans); color: var(--ink-strong); }
+.ds-route-caption { margin: 0; font: 400 13px/24px var(--font-sans); color: var(--text); }
+.ds-route-path { position: relative; height: 128px; margin-top: var(--space-6); }
+@media (max-width: 720px) { .ds-route-path { display: none; } }
+/* The markers only line up while all four cards fit on one row (4 × 200px + 3 × 16px gap). */
+@container (max-width: 847px) { .ds-route-path { display: none; } }
+.ds-route-path svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ds-route-path path { fill: none; stroke: var(--citrus); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1 10; }
+.ds-route-stop {
+  position: absolute; width: 20px; height: 20px; margin-left: -10px;
+  border-radius: var(--radius-full); background: var(--bg-surface);
+}
+.ds-route-stop--ink { box-shadow: 0 0 0 4px var(--ink); }
+.ds-route-stop--teal { box-shadow: 0 0 0 4px var(--teal); }
+.ds-route-stop--citrus { box-shadow: 0 0 0 4px var(--citrus); }
+.ds-route-finish {
+  position: absolute; width: 44px; height: 44px; margin-left: -22px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius-full); background: var(--sun); box-shadow: 0 0 0 6px var(--bg-surface);
+}
+.ds-route-finish svg { width: 20px; height: 20px; fill: none; stroke: var(--on-sun); stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.ds-route-stops {
+  list-style: none; margin: var(--space-6) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: var(--space-4);
+}
+.ds-route-card { padding: 20px; border-radius: var(--radius-2xl); background: var(--bg-surface); }
+.ds-route-card--sun { box-shadow: 0 0 0 2px var(--sun); }
+.ds-route-when { margin: 0; display: inline-flex; align-items: center; gap: var(--space-2); font: 600 13px/24px var(--font-sans); }
+.ds-route-when::before { content: ""; width: 8px; height: 8px; flex: none; border-radius: var(--radius-full); background: currentColor; }
+.ds-route-when--ink { color: var(--ink); }
+.ds-route-when--teal { color: var(--teal); }
+.ds-route-when--citrus { color: var(--citrus); }
+.ds-route-when--sun { color: var(--ink-strong); }
+.ds-route-when--sun::before { background: var(--sun); }
+.ds-route-place { margin: var(--space-2) 0 0; font: 600 16px/24px var(--font-sans); letter-spacing: -0.025em; color: var(--ink); }
+.ds-route-role { margin: var(--space-1) 0 0; font: 400 14px/24px var(--font-sans); color: var(--text); }
+
+/* ---------- Pull quote (about) ---------- */
+.ds-quote {
+  margin: 0; padding: var(--space-6) 28px; border-radius: var(--radius-2xl); background: var(--bg-sunken);
+  font: 600 20px/32px var(--font-sans); letter-spacing: -0.015em; color: var(--ink);
+}
+.ds-quote svg { display: block; width: 24px; height: 24px; margin-bottom: var(--space-2); fill: var(--citrus-glow); }
+
+/* ---------- SideTile (about sidebar) ---------- */
+.ds-tile { display: flex; gap: 20px; align-items: flex-start; padding: var(--space-6); border-radius: var(--radius-2xl); }
+.ds-tile--sun { background: var(--bg-sunken); }
+.ds-tile--teal { background: var(--teal-tint); }
+.ds-tile--citrus { background: var(--citrus-tint); }
+.ds-tile-well { flex: none; display: flex; width: 48px; height: 48px; align-items: center; justify-content: center; border-radius: var(--radius-full); }
+.ds-tile--sun .ds-tile-well { background: var(--sun); color: var(--on-sun); }
+.ds-tile--teal .ds-tile-well { background: var(--teal); color: var(--on-teal); }
+.ds-tile--citrus .ds-tile-well { background: var(--citrus); color: var(--on-citrus); }
+.ds-tile-well svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ds-tile-title { margin: 0; font: 600 16px/28px var(--font-sans); letter-spacing: -0.025em; color: var(--ink); }
+.ds-tile-body { margin: var(--space-1) 0 0; font: 400 14px/24px var(--font-sans); color: var(--text); }
+/* 12px visual gap above, but padded to a 44px hit area (py-2.5 / -my-2.5). */
+.ds-tile-cta {
+  display: inline-block; margin: 2px 0 -10px; padding: 10px 0;
+  font: 500 14px/24px var(--font-sans); color: var(--citrus); text-decoration: none; transition: color 150ms ease;
+}
+.ds-tile-cta:hover { color: var(--citrus-hover); }
+.ds-tile-cta:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
 /* ---------- Hover wash bleed ----------
    The wash and the stretched link bleed past the text. On phones the page gutter is only
    space-4, so bleed by space-4 there (no sideways scroll) and space-6 from sm up. */
