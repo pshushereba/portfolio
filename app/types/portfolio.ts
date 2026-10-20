@@ -1,12 +1,53 @@
+/* ---------- Projects ---------- */
+
+export type ProjectSize = 'wide' | 'narrow';
+export type ProjectTone = 'citrus' | 'teal' | 'sun' | 'neutral';
+export type ProjectMotif = 'sun' | 'rows' | 'skyline' | 'code';
+export type ProjectLogType = 'Architecture decision' | 'Bug hunt' | 'Proud of';
+
+/**
+ * The fields the Project* components need. Items from the `projects` content collection satisfy
+ * this structurally, so pages can pass them straight through.
+ */
 export interface Project {
-  name: string;
+  /** Content path, e.g. '/projects/supadata'. The slug is the last segment. */
+  path: string;
+  title: string;
+  /** One sentence, shown on the grid tile. */
   description: string;
-  link: { href: string; label: string };
+  /** Detail hero sub-line; falls back to `description`. */
+  tagline?: string;
+  /** Grid order, ascending. */
+  order: number;
+  size: ProjectSize;
+  tone: ProjectTone;
+  motif: ProjectMotif;
+  /** Status label, e.g. "Building". */
+  status: string;
+  /** Local path under /public. */
   logo?: string;
-  /** Citrus logo well — for the one project you're actively building. */
-  featured?: boolean;
-  /** Optional status label shown as a TopicTag, e.g. "Building". */
-  tag?: string;
+  url?: string;
+  urlLabel?: string;
+  codeUrl?: string;
+  codeLabel?: string;
+  /** Defaults to true in the schema; the generated collection type keeps it optional. */
+  isPublic?: boolean;
+  role?: string;
+  /** 'YYYY'. */
+  started?: string;
+  stack?: string[];
+  highlights?: string[];
+}
+
+/** A blog post that links to projects (the subset of the `blog` collection the project page uses). */
+export interface ProjectArticle {
+  path: string;
+  title: string;
+  description?: string;
+  dates: { published: string };
+  topic?: string;
+  projects?: string[];
+  logType?: ProjectLogType;
 }
 
 /** A plain year (e.g. `'2021'`) or a labelled date such as "Present". */

@@ -18,6 +18,47 @@ export default defineContentConfig({
         books: z.array(z.string()).optional(),
         /** Slugs of books the article only MENTIONS → "Also mentioned in" on the book page. */
         mentions: z.array(z.string()).optional(),
+        /** Slugs of projects this article is about → "From the build log" on /projects/[slug]. */
+        projects: z.array(z.string()).optional(),
+        /** Kind of build-log entry; drives the tag and its tone on the project page. */
+        logType: z.enum(['Architecture decision', 'Bug hunt', 'Proud of']).optional(),
+      }),
+    }),
+
+    projects: defineCollection({
+      type: 'page', // body = the long-form "What it is" on /projects/[slug]
+      source: 'projects/**/*.md',
+      schema: z.object({
+        /** One sentence, shown on the grid tile. */
+        description: z.string(),
+        /** Detail hero sub-line; falls back to `description`. */
+        tagline: z.string().optional(),
+        /** Grid order, ascending. */
+        order: z.number(),
+        /** wide = 4 of 6 columns, narrow = 2 of 6. */
+        size: z.enum(['wide', 'narrow']),
+        /** Tile / hero colour. Theme-invariant, see `.ds-block--*` in components.css. */
+        tone: z.enum(['citrus', 'teal', 'sun', 'neutral']),
+        /** Decorative illustration that animates on hover (ProjectMotif). */
+        motif: z.enum(['sun', 'rows', 'skyline', 'code']),
+        /** Status label, e.g. "Building", "Always tinkering", "Sketching". */
+        status: z.string(),
+        /** Local path under /public, e.g. '/images/projects/supadata.png'. */
+        logo: z.string().optional(),
+        /** External site + its label, e.g. 'supadata.app'. */
+        url: z.string().url().optional(),
+        urlLabel: z.string().optional(),
+        /** Repo link + its label, e.g. 'View the code'. */
+        codeUrl: z.string().url().optional(),
+        codeLabel: z.string().optional(),
+        /** false → "Not public yet" instead of a link. */
+        isPublic: z.boolean().default(true),
+        role: z.string().optional(),
+        /** 'YYYY'. */
+        started: z.string().optional(),
+        stack: z.array(z.string()).default([]),
+        /** "What I'm proud of" sidebar on the project page. */
+        highlights: z.array(z.string()).default([]),
       }),
     }),
 
