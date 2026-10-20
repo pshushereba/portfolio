@@ -40,6 +40,8 @@
           </header>
           <ArticleBody class="mt-8">
             <ContentRenderer :value="article" />
+            <!-- Books this article is about, unless the body already embeds them with ::book-card -->
+            <BookCard v-for="slug in trailingBooks" :key="slug" :slug="slug" />
           </ArticleBody>
         </article>
       </div>
@@ -63,5 +65,23 @@ if (!article.value) {
 useSeoMeta({
   title: article.value.title,
   description: article.value.description,
+});
+
+/** Slugs of every `::book-card{slug="…"}` embedded in the body (minimark: [tag, props, ...children]). */
+function embeddedBookSlugs(nodes: unknown[], found = new Set<string>()): Set<string> {
+  for (const node of nodes) {
+    if (!Array.isArray(node)) continue;
+    const [tag, props, ...children] = node as [unknown, unknown, ...unknown[]];
+    const slug = props && typeof props === 'object' ? (props as Record<string, unknown>).slug : undefined;
+    if ((tag === 'book-card' || tag === 'BookCard') && typeof slug === 'string') found.add(slug);
+    embeddedBookSlugs(children, found);
+  }
+  return found;
+}
+
+const trailingBooks = computed(() => {
+  const body = article.value?.body?.value ?? [];
+  const embedded = embeddedBookSlugs(body);
+  return (article.value?.books ?? []).filter((slug) => !embedded.has(slug));
 });
 </script>

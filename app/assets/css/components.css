@@ -367,4 +367,120 @@
 .ds-prose li { margin: var(--space-3) 0; padding-left: 14px; }
 .ds-prose li::marker { color: var(--citrus); font-size: 14px; font-weight: 600; }
 .ds-prose hr { border: 0; border-top: 1px solid var(--border); margin: var(--space-20) 0; }
+
+/* ---------- Books: palettes ----------
+   Shared by drawn covers and spines. The one literal colour allowed anywhere in the Books
+   section is the rgb(0 0 0 / .14) spine shading. */
+.ds-pal--neutral { background: var(--neutral-fill); color: var(--on-neutral); }
+.ds-pal--teal { background: var(--teal); color: var(--on-teal); }
+.ds-pal--sun { background: var(--sun); color: var(--on-sun); }
+.ds-pal--glow { background: var(--citrus-glow); color: var(--on-sun); }
+.ds-pal--citrus { background: var(--citrus); color: var(--on-citrus); }
+
+/* ---------- Books: cover (BookCover) ----------
+   Photo first, drawn fallback. Both share the box; the size modifier sets the dimensions and
+   the per-size type scale through custom properties. */
+.ds-cover {
+  position: relative; display: block; flex: none; overflow: hidden;
+  aspect-ratio: 2 / 3; border-radius: 3px 8px 8px 3px;
+  --cover-spine: 7px; --cover-pad: 16px 14px 14px 20px;
+  --cover-rule-w: 22px; --cover-rule-h: 3px;
+  --cover-title: 700 15px/18px var(--font-sans); --cover-title-ls: -0.01em;
+  --cover-author: 500 11px/14px var(--font-sans);
+  --cover-ring: 104px; --cover-ring-x: -30px; --cover-ring-y: 40px; --cover-ring-w: 2px; --cover-ring-o: .28;
+}
+.ds-cover--photo { box-shadow: var(--shadow-lg), 0 0 0 1px var(--border-strong); background: var(--bg-sunken); }
+.ds-cover--photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ds-cover--drawn {
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: var(--cover-pad);
+  box-shadow: inset var(--cover-spine) 0 0 rgb(0 0 0 / .14), var(--shadow-lg);
+}
+.ds-cover-ring {
+  position: absolute; right: var(--cover-ring-x); bottom: var(--cover-ring-y);
+  width: var(--cover-ring); height: var(--cover-ring); border-radius: var(--radius-full);
+  border: var(--cover-ring-w) solid currentColor; opacity: var(--cover-ring-o); pointer-events: none;
+}
+.ds-cover-rule { display: block; width: var(--cover-rule-w); height: var(--cover-rule-h); background: currentColor; }
+.ds-cover-title { position: relative; display: block; font: var(--cover-title); letter-spacing: var(--cover-title-ls); overflow-wrap: anywhere; }
+.ds-cover-author { position: relative; display: block; font: var(--cover-author); }
+
+.ds-cover--xs { width: 44px; height: 66px; border-radius: 2px 5px 5px 2px; --cover-spine: 4px; --cover-pad: 0; }
+.ds-cover--xs .ds-cover-ring { display: none; }
+.ds-cover--sm {
+  width: 56px; height: 84px; border-radius: 2px 6px 6px 2px;
+  --cover-spine: 5px; --cover-pad: 8px 6px 6px 10px;
+  --cover-rule-w: 12px; --cover-rule-h: 2px;
+  --cover-title: 700 9px/11px var(--font-sans); --cover-title-ls: 0;
+}
+.ds-cover--sm .ds-cover-ring { display: none; }
+.ds-cover--md { width: 124px; height: 186px; }
+.ds-cover--md .ds-cover-ring { --cover-ring: 96px; --cover-ring-x: -28px; --cover-ring-y: 34px; }
+.ds-cover--grid { width: 100%; }
+.ds-cover--xl {
+  width: 100%; max-width: 280px; border-radius: 4px 12px 12px 4px; transform: rotate(-2deg);
+  --cover-spine: 12px; --cover-pad: 28px 24px 24px 36px;
+  --cover-rule-w: 40px; --cover-rule-h: 4px;
+  --cover-title: 700 32px/36px var(--font-sans); --cover-title-ls: -0.025em;
+  --cover-author: 500 14px/20px var(--font-sans);
+  --cover-ring: 220px; --cover-ring-x: -60px; --cover-ring-y: 80px; --cover-ring-w: 3px; --cover-ring-o: .25;
+}
+
+/* ---------- Books: spine (BookSpine) ---------- */
+.ds-spine {
+  position: relative; flex: none; margin: 0; padding: 14px 0; border: 0;
+  border-radius: 3px 3px 2px 2px;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  font: inherit; cursor: pointer;
+  transform-origin: bottom left; transform: translateY(0);
+  box-shadow: inset -3px 0 0 rgb(0 0 0 / .14);
+  transition: transform 150ms ease;
+  scroll-snap-align: center;
+}
+.ds-spine-band { width: calc(100% - 10px); height: 2px; flex: none; background: currentColor; opacity: .45; }
+.ds-spine-label {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font: 700 12px/1 var(--font-sans); letter-spacing: .02em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: calc(100% - 44px);
+}
+.ds-spine--selected { transform: translateY(-24px); box-shadow: 0 0 0 3px var(--bg-sunken), 0 0 0 5px var(--citrus); }
+.ds-spine--reading { margin-left: 22px; transform: translateY(0) rotate(-8deg); }
+.ds-spine--reading.ds-spine--selected { transform: translateY(-24px) rotate(-8deg); }
+.ds-spine:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ds-spine-now {
+  position: absolute; top: -34px; left: 50%; transform: translateX(-30%) rotate(8deg);
+  white-space: nowrap; padding: 2px var(--space-2); border-radius: var(--radius-full);
+  font: 600 12px/20px var(--font-sans); background: var(--sun); color: var(--on-sun);
+}
+
+/* ---------- Books: shelf (BookShelf) ---------- */
+.ds-shelf {
+  flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column;
+  border-radius: var(--radius-3xl); background: var(--bg-sunken);
+  padding: 28px clamp(16px, 4vw, 32px) 24px;
+}
+.ds-shelf-row {
+  margin-top: var(--space-2); height: 330px; padding: 0 12px;
+  display: flex; align-items: flex-end; gap: 4px;
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+/* Room for the "Now reading" pill, which hangs off the right of the last spine. */
+.ds-shelf-row::after { content: ""; flex: none; width: 16px; height: 1px; }
+.ds-shelf-board {
+  height: 14px; margin: 0 -8px; border-radius: 4px;
+  background: var(--neutral-fill); box-shadow: 0 10px 0 -4px var(--border-strong);
+}
+
+/* ---------- Books: "Wrote about it" badge ---------- */
+.ds-cover-badge {
+  position: absolute; top: 10px; right: -8px; z-index: 1;
+  padding: 2px var(--space-2); border-radius: var(--radius-md);
+  font: 600 12px/20px var(--font-sans); background: var(--sun); color: var(--on-sun);
+  box-shadow: 0 0 0 2px var(--bg-surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-spine { transition: none; }
+}
 }

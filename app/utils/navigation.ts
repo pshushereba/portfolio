@@ -8,5 +8,5 @@ export const siteNavigation: NavItem[] = [
   { label: 'About', to: '/about' },
   { label: 'Articles', to: '/articles' },
   { label: 'Projects', to: '/projects' },
-  // { label: 'Books', to: '/books' },
+  { label: 'Books', to: '/books' },
 ];

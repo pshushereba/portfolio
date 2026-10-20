@@ -56,7 +56,10 @@
   --color-citrus-tint: var(--citrus-tint);
   --color-on-citrus: var(--on-citrus);
   --color-teal: var(--teal);
+  --color-on-teal: var(--on-teal);
   --color-teal-tint: var(--teal-tint);
+  --color-neutral-fill: var(--neutral-fill);
+  --color-on-neutral: var(--on-neutral);
   --color-sun: var(--sun);
   --color-on-sun: var(--on-sun);
   --color-danger: var(--danger);
