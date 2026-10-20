@@ -287,6 +287,7 @@
 .ds-tag--citrus { background: var(--citrus-tint); color: var(--citrus); }
 .ds-tag--teal { background: var(--teal-tint); color: var(--teal); }
 .ds-tag--sun { background: var(--sun); color: var(--on-sun); }
+.ds-tag--neutral { background: var(--bg-sunken); color: var(--ink); }
 
 /* ---------- Panel ---------- */
 .ds-panel { border: 1px solid var(--border); border-radius: var(--radius-2xl); padding: var(--space-6); background: var(--bg-surface); }
@@ -658,5 +659,234 @@
   .ds-block-go, .ds-block-go svg, .ds-block-btn,
   .ds-motif-sun, .ds-motif-ring, .ds-motif-fill, .ds-motif-bld, .ds-motif-typed { transition: none; }
   .ds-motif-cursor { animation: none; }
+}
+
+/* ---------- Articles: topic colours ----------
+   Theme-aware (tokens), unlike the theme-invariant .ds-block--* project tiles. `.ds-topic--{slug}`
+   is the single source: it sets the fill, ink, kicker text and ring for one topic, and
+   `.ds-topic-block` / `.ds-topic-text` / the tabs read them. TOPICS in utils/articles.ts maps a
+   topic to its slug. */
+.ds-topic--debugging { --topic-fill: var(--citrus-glow); --topic-ink: #18181b; --topic-text: var(--citrus); }
+.ds-topic--career { --topic-fill: var(--teal); --topic-ink: var(--on-teal); --topic-text: var(--teal); }
+.ds-topic--software-design { --topic-fill: var(--sun); --topic-ink: #18181b; --topic-text: var(--ink); }
+.ds-topic--electronics { --topic-fill: var(--teal-tint); --topic-ink: var(--teal); --topic-text: var(--teal); --topic-ring: inset 0 0 0 1px var(--border-strong); }
+.ds-topic--chess { --topic-fill: var(--ink-strong); --topic-ink: var(--bg-surface); --topic-text: var(--ink-strong); }
+.ds-topic--books { --topic-fill: var(--citrus-tint); --topic-ink: var(--citrus); --topic-text: var(--citrus); --topic-ring: inset 0 0 0 1px var(--border-strong); }
+.ds-topic-block { background: var(--topic-fill); color: var(--topic-ink); box-shadow: var(--topic-ring, none); }
+.ds-topic-text { color: var(--topic-text); }
+/* Halftone texture over every colour block. */
+.ds-halftone {
+  position: absolute; inset: 0; pointer-events: none; opacity: .16;
+  background-image: radial-gradient(currentColor 1.4px, transparent 1.6px); background-size: 14px 14px;
+}
+/* Mono kicker: topic names, "Earlier", "Keep reading", the article page's top row. */
+.ds-kicker { margin: 0; font: 600 12px/20px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
+/* Topic icons (TopicIcon). The LED dome and rays, and the book's ribbon, light up with data-lit. */
+.ds-topic-icon { display: block; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+.ds-topic-icon .ds-icon-dome { transition: fill 360ms ease; }
+.ds-topic-icon .ds-icon-lit { opacity: 0; transition: opacity 360ms ease; }
+.ds-topic-icon[data-lit="true"] .ds-icon-dome { fill: var(--sun); }
+.ds-topic-icon[data-lit="true"] .ds-icon-lit { opacity: 1; }
+
+/* ---------- Articles: masthead (StackTraceMasthead) ---------- */
+.ds-masthead {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 24px;
+  border-top: 4px solid var(--ink-strong); border-bottom: 1px solid var(--border-strong); padding: 14px 0 12px;
+}
+.ds-wordmark { margin: 0; display: inline-flex; align-items: center; gap: 8px; font: 700 28px/40px var(--font-mono); letter-spacing: -0.02em; color: var(--ink-strong); }
+.ds-wordmark--sm { gap: 6px; font: 700 20px/28px var(--font-mono); letter-spacing: 0; text-transform: none; }
+.ds-cursor { display: inline-block; flex: none; width: 12px; height: 26px; background: var(--citrus-glow); animation: ds-blink 1.1s steps(1) infinite; }
+.ds-cursor--sm { width: 8px; height: 18px; }
+.ds-cursor--md { width: 10px; height: 22px; }
+.ds-masthead-sub { margin: 0; font: 500 12px/20px var(--font-mono); letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); }
+
+/* ---------- Articles: section tabs (SectionTabs) ---------- */
+.ds-tabs { display: flex; flex-wrap: wrap; gap: 0 4px; border-bottom: 1px solid var(--border-strong); }
+.ds-tab {
+  min-height: 44px; display: inline-flex; align-items: center; gap: 8px;
+  border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; background: transparent;
+  padding: 10px 12px 8px; font: 500 14px/24px var(--font-sans); color: var(--text); cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.ds-tab:hover { color: var(--ink-strong); }
+.ds-tab[aria-pressed="true"] { color: var(--ink-strong); border-bottom-color: var(--topic-fill, var(--ink-strong)); }
+.ds-tab-dot { width: 8px; height: 8px; flex: none; border-radius: var(--radius-full); background: var(--topic-fill, var(--ink-strong)); box-shadow: var(--topic-ring, none); }
+.ds-tab--empty .ds-tab-dot { background: var(--border-strong); box-shadow: none; }
+.ds-tab-count { font: 500 12px/20px var(--font-mono); color: var(--text-muted); }
+
+/* ---------- Articles: colour block (TopicArt) ---------- */
+.ds-art {
+  position: relative; overflow: hidden; border-radius: var(--radius-3xl); padding: 28px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.ds-art--card { height: 260px; padding: 22px 24px; }
+.ds-art--compact { height: 240px; }
+.ds-art-top { position: relative; display: flex; justify-content: space-between; gap: 12px; font: 600 13px/20px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
+.ds-art-icon { position: relative; display: flex; justify-content: center; }
+.ds-art-foot { position: relative; height: 26px; }
+.ds-art--card .ds-art-foot { height: 20px; }
+.ds-wiggle { display: flex; transition: transform 260ms cubic-bezier(.3, 1.6, .5, 1); }
+.ds-story:hover .ds-wiggle, .ds-story:focus-within .ds-wiggle,
+.ds-card:hover .ds-wiggle, .ds-card:focus-visible .ds-wiggle { transform: rotate(-10deg) scale(1.08); }
+/* Highlighter sweep across a title. */
+.ds-sweep {
+  background-image: linear-gradient(var(--sun), var(--sun)); background-repeat: no-repeat; background-size: 0% 100%;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 .08em;
+  transition: background-size 320ms ease, color 150ms ease;
+}
+.ds-story:hover .ds-sweep, .ds-story:focus-within .ds-sweep,
+.ds-card:hover .ds-sweep, .ds-card:focus-visible .ds-sweep { background-size: 100% 100%; color: var(--on-sun); }
+
+/* ---------- Articles: lead (ArticleLead) ---------- */
+.ds-story { display: flex; flex-wrap: wrap; gap: 40px; align-items: stretch; }
+.ds-story-text { flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.ds-story-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.ds-story-title { margin: 0; font: 700 44px/54px var(--font-sans); letter-spacing: -0.03em; color: var(--ink-strong); overflow-wrap: anywhere; }
+.ds-story-title a { color: inherit; text-decoration: none; }
+.ds-story-desc { margin: 0; font-size: 18px; line-height: 32px; color: var(--text); }
+.ds-story-date { margin: 0; font: 400 13px/24px var(--font-sans); color: var(--text-muted); }
+.ds-story .ds-cta { margin-top: 0; min-height: 44px; text-decoration: none; }
+.ds-story .ds-cta:hover { color: var(--citrus-hover); }
+.ds-story:hover .ds-cta svg { transform: translateX(2px); }
+.ds-story-art { flex: 1 1 320px; min-height: 300px; }
+.ds-latest { border-radius: var(--radius-full); background: var(--sun); color: var(--on-sun); padding: 0 8px; font: 600 11px/20px var(--font-sans); letter-spacing: .02em; text-transform: none; }
+
+/* ---------- Articles: series pill (SeriesPill) ---------- */
+.ds-series-pill {
+  display: inline-flex; align-items: center; gap: 10px; border-radius: var(--radius-full);
+  background: var(--neutral-fill); color: var(--on-neutral); padding: 4px 6px 4px 14px;
+  font: 600 13px/24px var(--font-mono); letter-spacing: 0; text-transform: none; text-decoration: none;
+  transition: background-color 150ms ease;
+}
+a.ds-series-pill:hover { background: var(--neutral-fill-hover); }
+.ds-series-pill--sm { gap: 6px; padding: 0 4px 0 10px; font: 600 11px/20px var(--font-mono); letter-spacing: .02em; }
+.ds-series-no { border-radius: var(--radius-full); background: var(--sun); color: var(--on-sun); padding: 0 10px; }
+.ds-series-pill--sm .ds-series-no { padding: 0 6px; line-height: 16px; }
+
+/* ---------- Articles: grid cards (ArticleCard) ---------- */
+.ds-earlier { margin: 72px 0 24px; padding-bottom: 8px; border-bottom: 1px solid var(--border-strong); color: var(--text-muted); }
+.ds-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 48px 40px; }
+.ds-card-item { display: flex; flex-direction: column; gap: 10px; }
+.ds-card { display: flex; flex-direction: column; gap: 14px; border-radius: var(--radius-2xl); color: var(--ink-strong); text-decoration: none; }
+.ds-card:focus-visible { outline: 2px solid var(--focus); outline-offset: 6px; }
+.ds-card-kicker { margin-top: 4px; }
+.ds-card-title { font: 700 24px/32px var(--font-sans); letter-spacing: -0.025em; overflow-wrap: anywhere; }
+.ds-card--compact .ds-card-title { font-size: 22px; line-height: 30px; }
+.ds-card-desc { margin: 0; font-size: 16px; line-height: 28px; color: var(--text); }
+.ds-card-date { margin: 0; font: 400 13px/24px var(--font-sans); color: var(--text-muted); }
+.ds-strip {
+  position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  background: var(--neutral-fill); color: var(--on-neutral); padding: 14px 24px; font: 500 14px/24px var(--font-sans);
+  transform: translateY(101%); transition: transform 220ms ease;
+}
+.ds-strip--sun { background: var(--sun); color: var(--on-sun); }
+.ds-strip svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ds-card:hover .ds-strip, .ds-card:focus-visible .ds-strip { transform: translateY(0); }
+/* "Back to all articles" art (ArchiveCard). */
+.ds-archive-art { background: var(--neutral-fill); color: var(--on-neutral); }
+.ds-archive-rule { position: relative; border-top: 4px solid currentColor; padding-top: 10px; }
+.ds-archive-rule .ds-cursor { background: #ff922b; }
+.ds-swatches { position: relative; display: flex; gap: 8px; }
+.ds-swatches span { width: 28px; height: 28px; border-radius: 6px; }
+
+/* ---------- Articles: empty state ---------- */
+.ds-empty {
+  margin-top: 40px; border: 2px dashed var(--border-strong); border-radius: var(--radius-2xl); padding: 48px 32px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+}
+.ds-empty-title { margin: 0; font: 700 32px/40px var(--font-sans); letter-spacing: -0.025em; color: var(--ink-strong); }
+.ds-empty-body { margin: 0; font-size: 16px; line-height: 28px; color: var(--text); }
+.ds-empty .ds-btn { margin-top: 8px; }
+
+/* ---------- Article page ---------- */
+.ds-progress { position: sticky; top: 0; z-index: 40; height: 4px; background: var(--bg-surface); }
+.ds-progress-bar { display: block; height: 4px; width: 0; background: var(--citrus-glow); border-radius: 0 var(--radius-full) var(--radius-full) 0; }
+.ds-back { gap: 8px; min-height: 40px; padding: 0 16px 0 12px; text-decoration: none; transition: color 150ms ease; }
+.ds-back:hover { color: var(--citrus); }
+.ds-back svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 150ms ease; }
+.ds-back:hover svg { transform: translateX(-3px); }
+.ds-article-head { margin-top: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+.ds-article-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; color: var(--text-muted); }
+.ds-article-title { margin: 0; font: 700 clamp(2rem, 5vw, 3rem)/1.15 var(--font-sans); letter-spacing: -0.025em; color: var(--ink-strong); overflow-wrap: anywhere; }
+.ds-byline { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font: 400 16px/28px var(--font-sans); color: var(--text-muted); }
+.ds-byline-tick { width: 2px; height: 16px; border-radius: var(--radius-full); background: var(--citrus-glow); }
+.ds-lede { font-size: 20px; line-height: 34px; color: var(--ink); }
+.ds-prose > .ds-lede + * { margin-top: 28px; }
+.ds-end { margin-top: 64px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.ds-end-stamp {
+  width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-full);
+  background: var(--sun); color: var(--on-sun); font: 700 18px/1 var(--font-mono); transform: rotate(-8deg);
+}
+.ds-end-note { margin: 0; font: italic 400 15px/24px var(--font-serif); color: var(--text-muted); }
+.ds-filed {
+  margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-strong);
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;
+  font: 400 14px/24px var(--font-sans); color: var(--text-muted);
+}
+.ds-filed-topic { display: inline-flex; align-items: center; gap: 8px; }
+
+/* ---------- Article page: series box (SeriesBox) ---------- */
+.ds-series-box { margin-top: 40px; border: 1px solid var(--border-strong); border-radius: var(--radius-2xl); overflow: hidden; }
+.ds-series-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; background: var(--neutral-fill); color: var(--on-neutral); padding: 14px 20px; }
+.ds-series-name { margin: 0; font: 700 15px/24px var(--font-mono); }
+.ds-series-count { margin: 0; font: 500 12px/20px var(--font-mono); letter-spacing: .04em; text-transform: uppercase; color: #d4d4d8; }
+.ds-series-list { list-style: none; margin: 0; padding: 8px; display: flex; flex-direction: column; gap: 2px; }
+.ds-series-entry { display: flex; align-items: center; gap: 16px; min-height: 48px; border-radius: 10px; padding: 12px 14px; color: inherit; text-decoration: none; }
+.ds-series-entry--current { background: var(--bg-sunken); }
+a.ds-series-entry:hover { background: var(--bg-sunken); }
+a.ds-series-entry:hover .ds-series-entry-title { color: var(--citrus); }
+.ds-series-entry-no { flex: none; min-width: 48px; font: 700 15px/24px var(--font-mono); color: var(--citrus); }
+.ds-series-entry-title { flex: 1; min-width: 0; font: 600 15px/24px var(--font-sans); color: var(--ink-strong); }
+.ds-series-entry .ds-tag { flex: none; }
+
+/* ---------- Article page: keep reading ---------- */
+.ds-keep { margin-top: 96px; }
+.ds-keep-title { margin: 0 0 24px; padding-top: 14px; border-top: 4px solid var(--ink-strong); color: var(--text-muted); }
+
+/* ---------- Article page: topic banner (TopicBanner) and the easter eggs ---------- */
+.ds-banner {
+  margin-top: 48px; height: 320px; position: relative; overflow: hidden; border-radius: var(--radius-3xl); padding: 28px 32px;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; --egg-size: 156px;
+}
+.ds-banner-no { position: relative; display: flex; flex-direction: column; gap: 4px; }
+.ds-banner-no-label { font: 600 13px/20px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
+.ds-banner-no-value { font: italic 700 120px/0.9 var(--font-serif); }
+@media (max-width: 639.98px) {
+  .ds-banner { height: 280px; padding: 24px; gap: 16px; --egg-size: 128px; }
+  .ds-banner-no-value { font-size: 96px; }
+}
+.ds-egg {
+  position: relative; align-self: center; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  border: 0; background: transparent; color: inherit; padding: 8px; border-radius: var(--radius-2xl); cursor: pointer;
+}
+.ds-egg:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.ds-egg-icon { display: flex; transform-origin: 50% 100%; transition: transform 360ms cubic-bezier(.3, 1.6, .5, 1), filter 200ms ease; }
+.ds-egg-icon svg { width: var(--egg-size); height: var(--egg-size); }
+.ds-egg:hover:not([aria-pressed="true"]) .ds-egg-icon { filter: drop-shadow(0 6px 0 rgb(0 0 0 / .12)); }
+.ds-egg-label {
+  border-radius: var(--radius-full); padding: 2px 12px; font: 600 12px/20px var(--font-mono); white-space: nowrap;
+  background: var(--egg-pill-bg); color: var(--egg-pill-fg); transition: background-color 150ms ease, color 150ms ease;
+}
+.ds-egg[aria-pressed="true"] .ds-egg-label { background: var(--egg-pill-on-bg, var(--sun)); color: var(--egg-pill-on-fg, var(--on-sun)); }
+/* Per-topic pill colours and the clicked transform. */
+.ds-topic--debugging { --egg-pill-bg: #18181b; --egg-pill-fg: #fff; }
+.ds-topic--career { --egg-pill-bg: var(--on-teal); --egg-pill-fg: var(--teal); }
+.ds-topic--software-design { --egg-pill-bg: #18181b; --egg-pill-fg: #fff; --egg-pill-on-bg: #fff; --egg-pill-on-fg: #18181b; }
+.ds-topic--electronics { --egg-pill-bg: var(--teal); --egg-pill-fg: var(--on-teal); }
+.ds-topic--chess { --egg-pill-bg: var(--bg-surface); --egg-pill-fg: var(--ink-strong); }
+.ds-topic--books { --egg-pill-bg: var(--citrus); --egg-pill-fg: var(--on-citrus); }
+.ds-topic--debugging .ds-egg[aria-pressed="true"] .ds-egg-icon { transform: scale(1.25, .18); }
+.ds-topic--career .ds-egg[aria-pressed="true"] .ds-egg-icon { transform: translateY(-26px) rotate(-12deg); }
+/* Rotates about its centre, or it covers the label. */
+.ds-topic--software-design .ds-egg-icon { transform-origin: 50% 50%; }
+.ds-topic--software-design .ds-egg[aria-pressed="true"] .ds-egg-icon { transform: rotate(90deg); }
+.ds-topic--chess .ds-egg[aria-pressed="true"] .ds-egg-icon { transform: translate(26px, -44px); }
+.ds-topic--books .ds-egg[aria-pressed="true"] .ds-egg-icon { transform: scaleX(-1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-cursor { animation: none; }
+  .ds-tab, .ds-sweep, .ds-wiggle, .ds-strip, .ds-back, .ds-back svg, .ds-series-pill,
+  .ds-egg-icon, .ds-egg-label, .ds-topic-icon .ds-icon-dome, .ds-topic-icon .ds-icon-lit,
+  .ds-story .ds-cta svg { transition: none; }
 }
 }

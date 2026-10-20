@@ -97,12 +97,17 @@
 </template>
 
 <script setup lang="ts">
+import { byPublished } from '~/utils/articles';
+
 useSeoMeta({
   title: 'Patrick Shushereba - Software Developer, founder, and amateur runner',
   description: "I'm Patrick, a software developer and creator based in Southern California.",
 });
 
-const { data: articleList } = await useAsyncData('homeArticleList', () => {
-  return queryCollection('blog').limit(3).all();
-});
+const { data: homeArticles } = await useAsyncData('homeArticleList', () =>
+  queryCollection('blog').select('path', 'title', 'description', 'dates', 'topic').all(),
+);
+
+/** The three newest. The collection can't order on the nested `dates.published`, so sort here. */
+const articleList = computed(() => byPublished(homeArticles.value ?? []).slice(0, 3));
 </script>

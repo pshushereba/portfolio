@@ -6,7 +6,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "next": "node scripts/next-number.mjs"
   },
   "dependencies": {
     "@heroicons/vue": "^2.2.0",

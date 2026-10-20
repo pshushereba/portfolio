@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ tone?: 'citrus' | 'teal' | 'sun' }>(), { tone: 'teal' });
+withDefaults(defineProps<{ tone?: 'citrus' | 'teal' | 'sun' | 'neutral' }>(), { tone: 'teal' });
 </script>

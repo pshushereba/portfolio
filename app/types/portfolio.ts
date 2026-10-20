@@ -61,6 +61,27 @@ export interface Job {
   end: ResumeDate;
 }
 
+/* ---------- Articles ---------- */
+
+export type ArticleTopic = 'Debugging' | 'Career' | 'Software design' | 'Electronics' | 'Chess' | 'Books';
+
+/**
+ * The fields the Article* components need. Items from the `blog` content collection satisfy
+ * this structurally, so pages can pass them straight through.
+ */
+export interface Article {
+  /** Content path, e.g. '/blog/console-logs-1'. */
+  path: string;
+  title: string;
+  description?: string;
+  dates: { published: string };
+  topic?: ArticleTopic;
+  /** Series name, e.g. 'Console Logs'. The number is computed, see `seriesNumber`. */
+  series?: string;
+  /** Manual override for the series number. */
+  part?: number;
+}
+
 /* ---------- Books ---------- */
 
 export type BookTopic = 'Software' | 'Running' | 'Business' | 'Craft' | 'Fiction';

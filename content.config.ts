@@ -9,8 +9,12 @@ export default defineContentConfig({
         dates: z.object({
           published: z.string(),
         }),
-        /** Optional topic shown as a tag on article teasers, e.g. "Debugging". */
-        topic: z.string().optional(),
+        /** One of the six article categories; drives colour, icon and banner. */
+        topic: z.enum(['Debugging', 'Career', 'Software design', 'Electronics', 'Chess', 'Books']).optional(),
+        /** Series this article belongs to, e.g. 'Console Logs'. Number is derived — never typed. */
+        series: z.string().optional(),
+        /** Optional manual override for the series number. Only set this to freeze a number. */
+        part: z.number().int().positive().optional(),
         /**
          * Slugs of books this article is ABOUT. Drives "I wrote about this book" on the book page,
          * the "Wrote about it" badge on the shelf and the "Written in the margins" strip.
