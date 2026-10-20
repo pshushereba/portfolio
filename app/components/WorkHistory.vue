@@ -8,10 +8,10 @@
     </template>
 
     <ol class="ds-work">
-      <li v-for="job in resume" :key="job.company">
-        <span class="ds-work-logo" aria-hidden="true">
+      <li v-for="(job, index) in resume" :key="job.company">
+        <span :class="['ds-work-logo', { [fallbackTone(index)]: !job.logo }]" aria-hidden="true">
           <img v-if="job.logo" :src="job.logo" alt="" class="h-7 w-7 rounded-full" />
-          <BuildingOfficeIcon v-else class="h-5 w-5 text-muted" />
+          <template v-else>{{ job.company.charAt(0) }}</template>
         </span>
         <dl>
           <dt>Company</dt>
@@ -38,12 +38,12 @@
 </template>
 
 <script setup lang="ts">
-import { BuildingOfficeIcon } from '@heroicons/vue/20/solid';
 import nexient from '~/assets/images/nexient.png';
 import sbc from '~/assets/images/san_bern_court.png';
 import pdfResume from '~/assets/static/resume.pdf';
 import type { Job, ResumeDate } from '~/types/portfolio';
 
+// TODO: add the current role (the list still ends at Nexient, 2021 — 2023).
 const resume: Job[] = [
   {
     company: 'Nexient',
@@ -71,6 +71,12 @@ const resume: Job[] = [
     end: '2019',
   },
 ];
+
+/** Tinted well for rows without a logo: citrus → teal → neutral, rotating by row index. */
+const fallbackTones = ['ds-work-logo--citrus', 'ds-work-logo--teal', 'ds-work-logo--neutral'] as const;
+function fallbackTone(index: number): string {
+  return fallbackTones[index % fallbackTones.length] ?? fallbackTones[0];
+}
 
 function dateLabel(date: ResumeDate): string {
   return typeof date === 'string' ? date : date.label;

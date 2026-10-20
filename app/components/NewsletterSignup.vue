@@ -1,5 +1,5 @@
 <template>
-  <SidebarPanel title="Stay up to date">
+  <SidebarPanel title="Stay up to date" tone="citrus">
     <template #icon>
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path class="ds-ico-fill" d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z" />

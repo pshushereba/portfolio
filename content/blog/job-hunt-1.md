@@ -1,9 +1,11 @@
 ---
 title: 'The Great American Job Hunt 2023 - Week 1'
+# TODO: replace this placeholder description with a real summary of the post.
 description: "Now that we know who you are, I know who I am. I'm not a mistake! It all makes sense!
   In a comic, you know how you can tell who the arch-villain's going to be?"
 dates:
   published: '2023-04-30'
+topic: 'Career'
 ---
 
 Now that we know who you are, I know who I am. I'm not a mistake! It all makes sense! In a comic, you know how you can tell who the arch-villain's going to be? He's the exact opposite of the hero. And most times they're friends, like you and me! I should've known way back when... You know why, David? Because of the kids. They called me Mr Glass.

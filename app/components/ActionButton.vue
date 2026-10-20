@@ -5,14 +5,17 @@
     :class="classes"
     :aria-disabled="disabled ? 'true' : undefined"
   >
+    <slot name="lead" />
     <slot />
     <slot name="icon" />
   </NuxtLink>
   <a v-else-if="href" :href="href" :class="classes" :aria-disabled="disabled ? 'true' : undefined">
+    <slot name="lead" />
     <slot />
     <slot name="icon" />
   </a>
   <button v-else :type="type" :class="classes" :disabled="disabled">
+    <slot name="lead" />
     <slot />
     <slot name="icon" />
   </button>
@@ -31,6 +34,16 @@ const props = withDefaults(
   }>(),
   { variant: 'primary', type: 'button' },
 );
+
+/**
+ * Slots: default = label · `lead` = icon before the label (e.g. a brand mark, give the svg
+ * `ds-btn-mark` so it is filled) · `icon` = icon after the label (stroked, 16px).
+ */
+defineSlots<{
+  default(): unknown;
+  lead(): unknown;
+  icon(): unknown;
+}>();
 
 const classes = computed(() => ['ds-btn', `ds-btn--${props.variant}`, { 'ds-btn--block': props.block }]);
 </script>

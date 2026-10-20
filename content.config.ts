@@ -9,6 +9,8 @@ export default defineContentConfig({
         dates: z.object({
           published: z.string(),
         }),
+        /** Optional topic shown as a tag on article teasers, e.g. "Debugging". */
+        topic: z.string().optional(),
       }),
     }),
   },
